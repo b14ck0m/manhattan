@@ -1,0 +1,13 @@
+{
+    "domain":"manhattan",
+    "name": "Manhattan V10 Light",
+    "requirements":[],
+    "dependencies": ["mqtt"],
+    "config_flow": true,
+    "zeroconf": [],
+    "codeowners": [
+        "@testmqtt"
+    ],
+    "iot_class": "local_polling",
+    "version": "0.2"
+}

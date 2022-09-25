@@ -1,0 +1,19 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already  configured"
+        },
+        "step": {
+            "init": {
+                "data": {
+                    "device_id": "Manhatan Light device UUID"
+                }
+            },
+            "relay_count": {
+                "data": {
+                    "count": "How many lights have the device?"
+                }
+            }
+        }
+    }
+}
