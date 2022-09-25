@@ -5,8 +5,8 @@
     "dependencies": ["mqtt"],
     "config_flow": true,
     "zeroconf": [],
-    "documentation": "https://github.com/b14ck0m/manhattan.git",
-    "issue_tracker":"https://github.com/b14ck0m/manhattan/issues",
+    "documentation": "https://github.com/b14ck0m/ha-manhattan/blob/main/README.md",
+    "issue_tracker":"https://github.com/b14ck0m/ha-manhattan/issues",
     "codeowners": [
         "@b14ck0m"
     ],
