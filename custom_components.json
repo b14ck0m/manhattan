@@ -1,0 +1,13 @@
+{
+    "manhattan": {
+        "version": "0.0.1",
+        "local_location": "/custom_components/manhattan/light.py",
+        "remote_location": "https://raw.githubusercontent.com/b14ck0m/ha-manhattan/main/custom_components/manhattan/light.py",
+        "visit_repo": "https://raw.githubusercontent.com/b14ck0m/ha-manhattan/",
+        "changelog": "https://raw.githubusercontent.com/b14ck0m/ha-manhattan/",
+        "resources": [
+            "https://raw.githubusercontent.com/b14ck0m/ha-manhattan/main/custom_components/manhattan/__init__.py",
+            "https://raw.githubusercontent.com/b14ck0m/ha-manhattan/main/custom_components/manhattan/manifest.json"
+        ]
+    }
+}
