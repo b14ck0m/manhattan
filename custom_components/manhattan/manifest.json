@@ -1,6 +1,6 @@
 {
     "domain":"manhattan",
-    "name": "Manhattan V10 Light",
+    "name": "manhattan",
     "requirements":[],
     "dependencies": ["mqtt"],
     "config_flow": true,
