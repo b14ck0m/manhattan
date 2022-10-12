@@ -33,7 +33,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
         _LOGGER.info(pformat("user step"))
         if user_input is None:
-            return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema_user), errors=errors)
+            return self.async_show_form(step_id="user", data_schema=vol.Schema(data_schema_user), errors=errors)
         
         _LOGGER.info(pformat(user_input))
         self.data[DEVICE_UUID] = user_input

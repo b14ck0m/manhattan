@@ -2,7 +2,7 @@
     "title": "Manhattan light",
     "config": {
         "step": {
-            "init": {
+            "user": {
                 "data": {
                     "device_id": "Manhatan Light device UUID"
                 },
