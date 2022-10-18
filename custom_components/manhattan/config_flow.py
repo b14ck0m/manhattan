@@ -8,6 +8,7 @@ from homeassistant import config_entries
 import voluptuous as vol
 
 from homeassistant.const import CONF_DEVICE_ID, CONF_COUNT
+from homeassistant.data_entry_flow import FlowResult
 
 from .const import DOMAIN, MQTT_ROOT_TOPIC, DEVICE_UUID, RELAY_COUNT
 
@@ -28,7 +29,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     CONNECTION_CLASS = config_entries.CONN_CLASS_LOCAL_PUSH
     
 
-    async def async_step_user(self, user_input=None):
+    async def async_step_user(self, user_input=None) -> FlowResult:
         data: Optional[Dict[str, Any]]
         errors = {}
         _LOGGER.info(pformat("user step"))
@@ -44,7 +45,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         
         return await self.async_step_relay_count()
     
-    async def async_step_relay_count(self, user_input=None):
+    async def async_step_relay_count(self, user_input=None) -> FlowResult:
         data: Optional[Dict[str, Any]]
         errors = {}
         _LOGGER.info(pformat("relay step"))
