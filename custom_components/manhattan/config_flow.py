@@ -30,7 +30,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     
 
     async def async_step_user(self, user_input=None) -> FlowResult:
-        data: Optional[Dict[str, Any]]
+        data: Dict[str, Any] = {}
         errors = {}
         _LOGGER.info(pformat("user step"))
         if user_input is None:
@@ -46,7 +46,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return await self.async_step_relay_count()
     
     async def async_step_relay_count(self, user_input=None) -> FlowResult:
-        data: Optional[Dict[str, Any]]
+        data: Dict[str, Any] = {}
         errors = {}
         _LOGGER.info(pformat("relay step"))
         if user_input is None:
