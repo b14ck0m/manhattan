@@ -22,14 +22,10 @@ data_schema_relay = {
 _LOGGER = logging.getLogger("Manhattan")
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-
     # The schema version of the entries that it creates
     # Home Assistant will call your migrate method if the version changes
     # (this is not implemented yet)
     VERSION = 1
-    
-    
-
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
