@@ -29,7 +29,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     
     
 
-    async def async_step_user(self, user_input=None) -> FlowResult:
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
         data: Dict[str, Any] = {}
         errors = {}
         _LOGGER.info(pformat("user step"))
@@ -45,7 +47,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         
         return await self.async_step_relay_count()
     
-    async def async_step_relay_count(self, user_input=None) -> FlowResult:
+    async def async_step_relay_count(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
         data: Dict[str, Any] = {}
         errors = {}
         _LOGGER.info(pformat("relay step"))
