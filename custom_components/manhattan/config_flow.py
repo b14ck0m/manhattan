@@ -19,6 +19,7 @@ data_schema_user = {
 data_schema_relay = {
     vol.Required(CONF_COUNT): str
 }
+_LOGGER = logging.getLogger("Manhattan")
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
