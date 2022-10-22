@@ -62,7 +62,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.data[RELAY_COUNT] = user_input["count"]
         self.data[CONF_NAME] = test_name
         path = [];
-        for i in range(0,len(int(self.data[RELAY_COUNT]))):
+        for i in range(0,int(self.data[RELAY_COUNT])):
             path.add(i);
         self.data[CONF_PATH] = path;
         return self.async_create_entry(title=DOMAIN,data=self.data)
