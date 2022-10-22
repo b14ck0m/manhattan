@@ -50,7 +50,7 @@ def setup_platform(
 async def async_setup_entry(
     hass: core.HomeAssistant,
     config_entry: config_entries.ConfigEntry,
-    async_add_entries,
+    async_add_entries: AddEntitiesCallback,
 ):
     _LOGGER.info(pformat(config_entry.entry_id))
     config = config_entry.data
