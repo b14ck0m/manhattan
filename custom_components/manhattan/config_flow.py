@@ -26,6 +26,10 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     # Home Assistant will call your migrate method if the version changes
     # (this is not implemented yet)
     VERSION = 1
+    def __init__(self):
+        self.data = {}
+        self._errors = {}
+
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
@@ -33,7 +37,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
         _LOGGER.info(pformat("user step"))
         if user_input is None:
-            return self.async_show_form(step_id="user", data_schema=vol.Schema(data_schema_user), errors=errors)
+            return self.async_show_form(step_id="user",
+                                        data_schema=vol.Schema(data_schema_user),
+                                        errors=self._errors)
         
         _LOGGER.info(pformat(user_input))
         self.data[DEVICE_UUID] = user_input
@@ -51,7 +57,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
         _LOGGER.info(pformat("relay step"))
         if user_input is None:
-            return self.async_show_form(step_id="relay_count", data_schema=vol.Schema(data_schema_relay), errors=errors)
+            return self.async_show_form(step_id="relay_count",
+                                        data_schema=vol.Schema(data_schema_relay),
+                                        errors=self._errors)
             
         self.data[RELAY_COUNT] = user_input
         _LOGGER.info(pformat(user_input))
