@@ -7,6 +7,8 @@ import voluptuous as vol
 
 from pprint import pformat
 
+from .const import DEVICE_UUID
+
 
 
 import homeassistant.helpers.config_validation as cv
