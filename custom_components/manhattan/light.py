@@ -50,7 +50,7 @@ async def async_setup_entry(
     config_entry: config_entries.ConfigEntry,
     async_add_entries,
 ):
-    _LOGGER.info(pformat(config_entry.entry_id)
+    _LOGGER.info(pformat(config_entry.entry_id))
     _LOGGER.info(pformat(hass.data[DOMAIN]))
     config = hass.data[DOMAIN][config_entry.entry_id]
     _LOGGER.info(pformat(config));
