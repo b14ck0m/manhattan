@@ -62,7 +62,7 @@ async def async_setup_entry(
             "relay_num": config[CONF_PATH][i],
             "address": config[DEVICE_UUID],
         }
-        add_entities([ManhattanLight(light)])
+        async_add_entities([ManhattanLight(light)])
     
 class ManhattanLight(LightEntity):
     """Representation of an Manhattan Light."""
