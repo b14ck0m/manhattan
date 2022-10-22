@@ -7,8 +7,6 @@ from .const import DOMAIN
 from pprint import *
 
 _LOGGER = logging.getLogger(__name__)
-test_name = ["kuchnia","lazienka","salon","biuro","sypialnia","przedpokoj
-1","przedpokoj 2","sciana salon","kuchnia podswietlenie"," lustro"]
 
 async def async_setup_entry(
     hass: core.HomeAssistant, entry: config_entries.ConfigEntry
