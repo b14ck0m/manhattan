@@ -8,7 +8,7 @@ from pprint import *
 from homeassistant import config_entries 
 import voluptuous as vol
 
-from homeassistant.const import CONF_DEVICE_ID, CONF_COUNT
+from homeassistant.const import CONF_DEVICE_ID, CONF_COUNT, CONF_NAME, CONF_PATH
 from homeassistant.data_entry_flow import FlowResult
 
 from .const import DOMAIN, MQTT_ROOT_TOPIC, DEVICE_UUID, RELAY_COUNT
@@ -60,7 +60,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                                         errors=self._errors)
             
         self.data[RELAY_COUNT] = user_input
-        self.data[RELAY_NAME] = test_name
+        self.data[CONF_NAME] = test_name
         path = [];
         for i in range(0,len(int(self.data[RELAY_COUNT]))):
             path.add(i);
