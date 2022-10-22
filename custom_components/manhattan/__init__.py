@@ -4,8 +4,11 @@ import logging
 
 from homeassistant import config_entries, core
 from .const import DOMAIN
+from pprint import *
 
 _LOGGER = logging.getLogger(__name__)
+test_name = ["kuchnia","lazienka","salon","biuro","sypialnia","przedpokoj
+1","przedpokoj 2","sciana salon","kuchnia podswietlenie"," lustro"]
 
 async def async_setup_entry(
     hass: core.HomeAssistant, entry: config_entries.ConfigEntry
@@ -13,6 +16,7 @@ async def async_setup_entry(
     _LOGGER.info(pformat("setup entry"))
     hass.data.setdefault(DOMAIN, {})
     hass_data = dict(entry.data)
+    _LOGGER.debug(hass_data)
     #unsub_options_update_listener = entry.add_update_listener(options_update_listener)
     #hass_data["unsub_options_update_listener"] = unsub_options_update_listener
     hass.data[DOMAIN][entry.entry_id] = hass_data

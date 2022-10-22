@@ -52,15 +52,14 @@ async def async_setup_entry(
 ):
     config = hass.data[DOMAIN][Config_entry.entry_id]
     _LOGGER.info(pformat(config));
-    
-    #_LOGGER.info(pformat(config))
 
-    light = {
-        "name": config[CONF_NAME],
-        "address": config[CONF_ADDRESS],
-    }
-
-    add_entities([ManhattanLight(light)])
+    for i in range(0, len(config[CONF_NAME])):
+        light = {
+            "name": config[CONF_NAME][i],
+            "relay_num": config[CONF_PATH][i],
+            "address": config[CONF_ADDRESS],
+        }
+        add_entities([ManhattanLight(light)])
     
 class ManhattanLight(LightEntity):
     """Representation of an Manhattan Light."""
