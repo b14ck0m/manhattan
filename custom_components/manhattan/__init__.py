@@ -20,7 +20,7 @@ async def async_setup_entry(
     hass.data[DOMAIN][entry.entry_id] = hass_data
     _LOGGER.info(pformat(hass_data))
     hass.async_create_task(
-        hass.config_entries.async_forward_entry_etup(entry, "light")
+        hass.config_entries.async_forward_entry_setup(entry, "light")
     )
     return true
 
