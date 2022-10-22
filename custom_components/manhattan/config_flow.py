@@ -21,8 +21,7 @@ data_schema_relay = {
     vol.Required(CONF_COUNT): str
 }
 _LOGGER = logging.getLogger(__name__)
-test_name = ["kuchnia","lazienka","salon","biuro","sypialnia","przedpokoj
-1","przedpokoj 2","sciana salon","kuchnia podswietlenie"," lustro"]
+test_name = ["kuchnia","lazienka","salon","biuro","sypialnia","przedpokoj 1","przedpokoj 2","sciana salon","kuchnia podswietlenie"," lustro"]
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     # The schema version of the entries that it creates
