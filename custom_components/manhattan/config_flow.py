@@ -58,8 +58,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_show_form(step_id="relay_count",
                                         data_schema=vol.Schema(data_schema_relay),
                                         errors=self._errors)
-         _LOGGER.info(pformat(user_input))
-        self.data[RELAY_COUNT] = user_input["relay_count"]
+        _LOGGER.info(pformat(user_input))
+        self.data[RELAY_COUNT] = user_input["count"]
         self.data[CONF_NAME] = test_name
         path = [];
         for i in range(0,len(int(self.data[RELAY_COUNT]))):
