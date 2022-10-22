@@ -51,8 +51,7 @@ async def async_setup_entry(
     async_add_entries,
 ):
     _LOGGER.info(pformat(config_entry.entry_id))
-    _LOGGER.info(pformat(hass.data[DOMAIN]))
-    config = hass.data[DOMAIN][config_entry.entry_id]
+    config = config_entry
     _LOGGER.info(pformat(config));
 
     for i in range(0, len(config[CONF_NAME])):
