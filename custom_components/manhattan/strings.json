@@ -3,12 +3,11 @@
     "config": {
         "step": {
             "user": {
-                "data": {
-                    "device_id": "Manhatan Light device UUID"
-                },
-                "description": "Enter device UUID",
-                "title": "Device UUID"
+                "description": "Do you want to find new devices?",
+                "title": "Welcome in Manhattan Lights"
             },
+            "zerconf_finding": {
+            }.
             "relay_count": {
                 "data": {
                     "count": "How many lights have the device?"
