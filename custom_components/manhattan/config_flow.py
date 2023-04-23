@@ -110,7 +110,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if resp.status != 200:
                 return await abort();
         #ret = requests.post("https://"+self.host+"/uri/blocker",data,verify=False);
-        data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","MQTT_USERNAME":"'+self.data[MQTT_USERNAME]+'","MQTT_PASSWORD":"'+self.data[MQTT_PASSWORD]+'"}';
+        data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","MQTTUser":"'+self.data[MQTT_USERNAME]+'","MQTTPassword":"'+self.data[MQTT_PASSWORD]+'"}';
         session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
         async with session.post("https://"+self.host+"/uri/mqtt_conf",data=data) as resp:
             if resp.status != 200:
