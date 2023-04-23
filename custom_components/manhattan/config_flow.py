@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import aiohttp
 import logging
 from typing import Any
 from pprint import *
@@ -41,10 +42,34 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self._errors = {}
         self.host = {}
 
-    async def async_step_user(
+    async def async_step_user(self, user_input: dict[str, Any] | None = None) -> FlowResult:
+        if user_input is None:
+            return self.async_show_form(step_id="user",
+                                        data_schema=vol.Schema(),
+                                        errors=self._errors)
+        
+        _LOGGER.info(pformat(user_input))
+        
+        #await self.async_set_unique_id(self.data[DEVICE_UUID])
+        #self._abort_if_unique_id_configured()
+        
+        return await self.async_step_zeroconf()
+
+
+
+    async def async_step_zeroconf(self, discovery_info:
+            zeroconf.ZeroconfServiceInfo) -> FlowResult:
+        _LOGGER.info("CF: Host: " + discovery_info.host)
+        self.host = discovery_info.host
+        #self.uuid =
+        _LOGGER.info("CF: addresses" + discovery_info.addresses + " hostname: " + discovery_info.hostname + " name: " + discovery_info.name + "properties: " + discovert_info.properties);
+        return await self.async_step_start()
+
+    async def async_step_start(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         _LOGGER.info("user step")
+
         if user_input is None:
             return self.async_show_form(step_id="init",
                                         data_schema=vol.Schema(data_schema_user),
@@ -57,12 +82,6 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         #await self.async_set_unique_id(self.data[DEVICE_UUID])
         #self._abort_if_unique_id_configured()
         
-        return await self.async_step_zeroconf()
-
-    async def async_step_zeroconf(self, discovery_info:
-            zeroconf.ZeroconfServiceInfo) -> FlowResult:
-        _LOGGER.info("CF: Host: " + discovery_info.host)
-        self.host = discovery_info.host
         return await self.async_step_mqtt()
 
     async def async_step_mqtt(
@@ -82,6 +101,19 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self.data[MQTT_PORT] == 8883;
         _LOGGER.info("[MQTT] "+self.data[MQTT_USERNAME] +self.data[MQTT_PASSWORD]
         + str(self.data[MQTT_PORT]))
+
+        data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","hostname":'+self.data[MQTT_BROKER]+'"}';
+
+        ret = requests.post("https://"+self.host+"/uri/blocker",data,verify=False);
+
+        if ret.text == "SUCCESS\n":
+            data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","MQTT_USERNAME":'+self.data[MQTT_USERNAME]+'","MQTT_PASSWORD":"'+self.data[MQTT_PASSWORD]+'"}';
+            ret = requests.post("https://"+self.host+"/uri/mqtt_conf",data,verify=False);
+            if ret.text !="SUCCESS\n":
+                return await abort();
+        else:
+            return await abort();
+
 
         return await self.async_step_relay_count()    
 
