@@ -17,7 +17,7 @@
                 "description": "Please provide configuration of MQTT Broker:",
                 "data": {
                     "target": "broker hostname",
-                    "user": "Username",
+                    "username": "Username",
                     "password": "Password",
                     "port": "Provide port if not default"
                 }
