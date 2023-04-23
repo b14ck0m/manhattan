@@ -63,7 +63,11 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         _LOGGER.info("CF: Host: " + discovery_info.host)
         self.host = discovery_info.host
         #self.uuid =
-        _LOGGER.info("CF: addresses" + discovery_info.addresses + " hostname: " + discovery_info.hostname + " name: " + discovery_info.name + "properties: " + discovert_info.properties);
+        _LOGGER.info("CF: hostname: " + discovery_info.hostname + " name: " + discovery_info.name );
+        for i in discovery_info.addresses:
+            _LOGGER.info("CF: addresses" + i);
+        for x in discovery_info.properties:
+            _LOGGER.info("key: " +x+" value:"+discovery_info.properties[x]);
         return await self.async_step_start()
 
     async def async_step_start(
