@@ -106,13 +106,13 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         + str(self.data[CONF_PORT]))
         data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","hostname":'+self.data[MQTT_BROKER]+'"}';
         session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
-        async with session.post("https://"+self.host+"/uri/blocker",data) as resp:
+        async with session.post("https://"+self.host+"/uri/blocker",data=data) as resp:
             if resp.status != 200:
                 return await abort();
         #ret = requests.post("https://"+self.host+"/uri/blocker",data,verify=False);
         data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","MQTT_USERNAME":'+self.data[MQTT_USERNAME]+'","MQTT_PASSWORD":"'+self.data[MQTT_PASSWORD]+'"}';
         session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
-        async with session.post("https://"+self.host+"/uri/mqtt_conf",data) as resp:
+        async with session.post("https://"+self.host+"/uri/mqtt_conf",data=data) as resp:
             if resp.status != 200:
                 return await abort();
         return await self.async_step_relay_count()    
