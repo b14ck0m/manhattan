@@ -14,10 +14,9 @@ import voluptuous as vol
 from homeassistant.const import CONF_DEVICE_ID, CONF_COUNT, CONF_NAME, CONF_PATH, CONF_PASSWORD, CONF_USERNAME, CONF_TARGET, CONF_PORT
 from homeassistant.data_entry_flow import FlowResult
 
-from .const import DOMAIN, MQTT_ROOT_TOPIC, DEVICE_UUID, RELAY_COUNT
+from .const import DOMAIN, MQTT_ROOT_TOPIC, DEVICE_UUID, RELAY_COUNT, DEVICE_PASSWORD
 
 data_schema_user = {
-    vol.Required(CONF_DEVICE_ID): str,
     vol.Required(CONF_PASSWORD): str
 }
 
@@ -42,7 +41,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     def __init__(self):
         self.data = {}
         self._errors = {}
-        self.host = {}
+        self.host = ''
+        self.name = ''
 
     async def async_step_user(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         if user_input is None:
@@ -61,7 +61,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             zeroconf.ZeroconfServiceInfo) -> FlowResult:
         _LOGGER.info("CF: Host: " + discovery_info.host)
         self.host = discovery_info.host
-        #self.uuid =
+        self.name = discovery_info.hostname.split('.')[0]
         _LOGGER.info("CF: hostname: " + discovery_info.hostname + " name: " + discovery_info.name );
         for i in discovery_info.addresses:
             _LOGGER.info("CF: addresses" + i);
@@ -76,10 +76,10 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is None:
             return self.async_show_form(step_id="deviceID",
                                         data_schema=vol.Schema(data_schema_user),
+                                        description_placeholders={"DEVICE_UUID":self.name},
                                         errors=self._errors)
         
         _LOGGER.info(pformat(user_input))
-        self.data[DEVICE_UUID] = user_input["device_id"]
         self.data[DEVICE_PASSWORD] = user_input[CONF_PASSWORD]
         
         #await self.async_set_unique_id(self.data[DEVICE_UUID])

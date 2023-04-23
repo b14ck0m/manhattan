@@ -8,7 +8,7 @@
             },
             "deviceID": {
                 "data": {
-                    "device_id": "Manhattan Light device UUID",
+                    "device_id": "Manhattan Light device {DEVICE_UUID} ",
                     "password": "Manhattan Light passowrd"
                 },
            "zerconf_finding": {
