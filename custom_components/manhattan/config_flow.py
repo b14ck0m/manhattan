@@ -8,8 +8,7 @@ from pprint import *
 from homeassistant import config_entries 
 import voluptuous as vol
 
-from homeassistant.const import CONF_DEVICE_ID, CONF_COUNT, CONF_NAME,
-CONF_PATH, CONF_PASSWORD, CONF_USERNAME, CONF_TARGET
+from homeassistant.const import CONF_DEVICE_ID, CONF_COUNT, CONF_NAME, CONF_PATH, CONF_PASSWORD, CONF_USERNAME, CONF_TARGET
 from homeassistant.data_entry_flow import FlowResult
 
 from .const import DOMAIN, MQTT_ROOT_TOPIC, DEVICE_UUID, RELAY_COUNT
