@@ -72,9 +72,10 @@ class ManhattanLight(LightEntity):
         _LOGGER.info(pformat(light))
         self._name = light["name"]
         self._state = False
+        self.address = light["address"]
         self.relay_num = light["relay_num"]
-        self.topic = f"/light/{self.relay_num}/state"
-        self.topic_switch = f"/light/{self.relay_num}/switch"
+        self.topic = f"/{self.address}/light/{self.relay_num}/state"
+        self.topic_switch = f"/{self.address}/light/{self.relay_num}/switch"
 
     @property
     def name(self) -> str:

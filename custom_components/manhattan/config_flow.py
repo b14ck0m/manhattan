@@ -81,6 +81,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         
         _LOGGER.info(pformat(user_input))
         self.data[DEVICE_PASSWORD] = user_input[CONF_PASSWORD]
+        self.data[DEVICE_UUID] = self.name;
         
         #await self.async_set_unique_id(self.data[DEVICE_UUID])
         #self._abort_if_unique_id_configured()
