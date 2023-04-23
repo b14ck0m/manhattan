@@ -2,12 +2,26 @@
     "title": "Manhattan light",
     "config": {
         "step": {
+            "init": {
+                "data": {
+                    "device_id": "Manhattan Light device UUID",
+                    "password": "Manhattan Light passowrd"
+                },
             "user": {
                 "description": "Do you want to find new devices?",
                 "title": "Welcome in Manhattan Lights"
             },
             "zerconf_finding": {
-            }.
+            },
+            "mqtt": {
+                "description": "Please provide configuration of MQTT Blocker:",
+                "data": {
+                    "target": "Hostname:",
+                    "user": "Username:",
+                    "password": "Password:",
+                    "port": "Provide port if not deafult:"
+                }
+            },
             "relay_count": {
                 "data": {
                     "count": "How many lights have the device?"
@@ -17,7 +31,7 @@
             }
         },
         "abort": {
-            "already_configured": "Device is already  configured"
+            "already_configured": "Device is already configured"
         },
         "error": {
             "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",

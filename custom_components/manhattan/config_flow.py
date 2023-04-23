@@ -14,11 +14,19 @@ from homeassistant.data_entry_flow import FlowResult
 from .const import DOMAIN, MQTT_ROOT_TOPIC, DEVICE_UUID, RELAY_COUNT
 
 data_schema_user = {
-    vol.Required(CONF_DEVICE_ID): str
+    vol.Required(CONF_DEVICE_ID): str,
+    vol.Required(CONF_PASSWORD): str
 }
 
 data_schema_relay = {
     vol.Required(CONF_COUNT): str
+}
+
+data_schema_mqtt = {
+    vol.Required(CONF_TARGET): str,
+    vol.Required(CONF_USERNAME): str,
+    vol.Required(CONF_PASSWORD): str,
+    CONF_PORT: int
 }
 _LOGGER = logging.getLogger(__name__)
 test_name = ["kuchnia","lazienka","salon","biuro","sypialnia","przedpokoj 1","przedpokoj 2","sciana salon","kuchnia podswietlenie"," lustro"]
@@ -31,25 +39,54 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     def __init__(self):
         self.data = {}
         self._errors = {}
+        self.host = {}
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         _LOGGER.info("user step")
         if user_input is None:
-            return self.async_show_form(step_id="user",
+            return self.async_show_form(step_id="init",
                                         data_schema=vol.Schema(data_schema_user),
                                         errors=self._errors)
         
         _LOGGER.info(pformat(user_input))
         self.data[DEVICE_UUID] = user_input["device_id"]
-        self.data[RELAY_COUNT] = ""
+        self.data[DEVICE_PASSWORD] = user_input[CONF_PASSWORD]
         
         #await self.async_set_unique_id(self.data[DEVICE_UUID])
         #self._abort_if_unique_id_configured()
         
-        return await self.async_step_relay_count()
-    
+        return await self.async_step_zeroconf()
+
+    async def async_step_zeroconf(self, discovery_info:
+            zeroconf.ZeroconfServiceInfo) -> FlowResult:
+        _LOGGER.info("CF: Zeroconf" + discovery_info)
+        _LOGGER.info("CF: Host: " + discovery_info.host)
+
+        self.host = discovery_info.host
+        return await self.async_step_mqtt()
+
+    async def async_step_mqtt(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        _LOGGER.info("mqtt step")
+        if user_input is None:
+            return self.async_show_form(step_id="mqtt",
+                                        data_schema=vol.Schema(data_schema_mqtt),
+                                        errors=self._errors)
+        _LOGGER.info(pformat(user_input))
+        self.data[MQTT_BROKER] = user_input[CONF_TARGET]
+        self.data[MQTT_USERNAME] = user_input[CONF_USERNAME]
+        self.data[MQTT_PASSWORD] = user_input[CONF_PASSWORD]
+        self.data[MQTT_PORT] = user_input[CONF_PORT]
+        if self.data[MQTT_PORT] == 0:
+            self.data[MQTT_PORT] == 8883;
+        _LOGGER.info("[MQTT] "+self.data[MQTT_USERNAME] +self.data[MQTT_PASSWORD]
+        + str(self.data[MQTT_PORT]))
+
+        return await self.async_step_relay_count()    
+
     async def async_step_relay_count(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
