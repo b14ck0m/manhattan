@@ -28,7 +28,7 @@ data_schema_mqtt = {
     vol.Required(CONF_TARGET): str,
     vol.Required(CONF_USERNAME): str,
     vol.Required(CONF_PASSWORD): str,
-    CONF_PORT: int
+    vol.Optional(CONF_PORT, default=8883): int
 }
 _LOGGER = logging.getLogger(__name__)
 test_name = ["kuchnia","lazienka","salon","biuro","sypialnia","przedpokoj 1","przedpokoj 2","sciana salon","kuchnia podswietlenie"," lustro"]
@@ -100,7 +100,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.data[MQTT_USERNAME] = user_input[CONF_USERNAME]
         self.data[MQTT_PASSWORD] = user_input[CONF_PASSWORD]
         self.data[MQTT_PORT] = user_input[CONF_PORT]
-        if self.data[MQTT_PORT] == 0:
+        if self.data[MQTT_PORT] = 0:
             self.data[MQTT_PORT] == 8883;
         _LOGGER.info("[MQTT] "+self.data[MQTT_USERNAME] +self.data[MQTT_PASSWORD]
         + str(self.data[MQTT_PORT]))
