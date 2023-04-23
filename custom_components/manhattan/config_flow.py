@@ -5,6 +5,7 @@ import asyncio
 import aiohttp
 import requests
 import logging
+import yaml
 from typing import Any
 from pprint import *
 from homeassistant import config_entries 
@@ -66,8 +67,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         _LOGGER.info("CF: hostname: " + discovery_info.hostname + " name: " + discovery_info.name );
         for i in discovery_info.addresses:
             _LOGGER.info("CF: addresses" + i);
-        for x in discovery_info.properties:
-            _LOGGER.info("key: " +x+" value:"+discovery_info.properties[x]);
+        _LOGGER.info("CF: " + yaml.dump(discovery_info.properties));
         return await self.async_step_start()
 
     async def async_step_start(
