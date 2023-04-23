@@ -16,10 +16,10 @@
             "mqtt": {
                 "description": "Please provide configuration of MQTT Broker:",
                 "data": {
-                    "target": "Hostname:",
-                    "user": "Username:",
-                    "password": "Password:",
-                    "port": "Provide port if not deafult:"
+                    "target": "broker hostname",
+                    "user": "Username",
+                    "password": "Password",
+                    "port": "Provide port if not default"
                 }
             },
             "relay_count": {

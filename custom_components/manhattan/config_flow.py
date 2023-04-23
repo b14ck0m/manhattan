@@ -99,9 +99,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self.data[MQTT_BROKER] = user_input[CONF_TARGET]
         self.data[MQTT_USERNAME] = user_input[CONF_USERNAME]
         self.data[MQTT_PASSWORD] = user_input[CONF_PASSWORD]
-        self.data[MQTT_PORT] = user_input[CONF_PORT]
-        if self.data[MQTT_PORT] == 0:
-            self.data[MQTT_PORT] = 8883;
+        self.data[CONF_PORT] = user_input[CONF_PORT]
+        if self.data[CONF_PORT] == 0:
+            self.data[CONF_PORT] = 8883;
         _LOGGER.info("[MQTT] "+self.data[MQTT_USERNAME] +self.data[MQTT_PASSWORD]
         + str(self.data[MQTT_PORT]))
 
