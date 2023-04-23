@@ -2,16 +2,16 @@
     "title": "Manhattan light",
     "config": {
         "step": {
-            "init": {
-                "data": {
-                    "device_id": "Manhattan Light device UUID",
-                    "password": "Manhattan Light passowrd"
-                },
             "user": {
                 "description": "Do you want to find new devices?",
                 "title": "Welcome in Manhattan Lights"
             },
-            "zerconf_finding": {
+            "deviceID": {
+                "data": {
+                    "device_id": "Manhattan Light device UUID",
+                    "password": "Manhattan Light passowrd"
+                },
+           "zerconf_finding": {
             },
             "mqtt": {
                 "description": "Please provide configuration of MQTT Blocker:",

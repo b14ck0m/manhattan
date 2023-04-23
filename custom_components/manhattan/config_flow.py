@@ -47,10 +47,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         if user_input is None:
             return self.async_show_form(step_id="user",
-                                        data_schema=vol.Schema(),
                                         errors=self._errors)
         
-        _LOGGER.info(pformat(user_input))
         
         #await self.async_set_unique_id(self.data[DEVICE_UUID])
         #self._abort_if_unique_id_configured()
@@ -68,9 +66,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         for i in discovery_info.addresses:
             _LOGGER.info("CF: addresses" + i);
         _LOGGER.info("CF: " + yaml.dump(discovery_info.properties));
-        return await self.async_step_start()
+        return await self.async_step_deviceID()
 
-    async def async_step_start(
+    async def async_step_deviceID(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         _LOGGER.info("user step")
