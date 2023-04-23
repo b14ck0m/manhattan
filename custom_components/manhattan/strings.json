@@ -8,14 +8,13 @@
             },
             "deviceID": {
                 "description": "Found new device {DEVICE_UUID}:",
+                "title": "Manhattan Light",
                 "data": {
                     "password": "Manhattan Light passowrd"
                 }
             },
-           "zerconf_finding": {
-            },
             "mqtt": {
-                "description": "Please provide configuration of MQTT Blocker:",
+                "description": "Please provide configuration of MQTT Broker:",
                 "data": {
                     "target": "Hostname:",
                     "user": "Username:",

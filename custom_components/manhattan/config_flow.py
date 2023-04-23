@@ -14,7 +14,7 @@ import voluptuous as vol
 from homeassistant.const import CONF_DEVICE_ID, CONF_COUNT, CONF_NAME, CONF_PATH, CONF_PASSWORD, CONF_USERNAME, CONF_TARGET, CONF_PORT
 from homeassistant.data_entry_flow import FlowResult
 
-from .const import DOMAIN, MQTT_ROOT_TOPIC, DEVICE_UUID, RELAY_COUNT, DEVICE_PASSWORD
+from .const import DOMAIN, MQTT_ROOT_TOPIC, DEVICE_UUID, RELAY_COUNT, DEVICE_PASSWORD, MQTT_BROKER, MQTT_USERNAME, MQTT_PASSWORD
 
 data_schema_user = {
     vol.Required(CONF_PASSWORD): str
