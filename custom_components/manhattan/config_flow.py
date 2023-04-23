@@ -61,9 +61,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_zeroconf(self, discovery_info:
             zeroconf.ZeroconfServiceInfo) -> FlowResult:
-        _LOGGER.info("CF: Zeroconf" + discovery_info)
         _LOGGER.info("CF: Host: " + discovery_info.host)
-
         self.host = discovery_info.host
         return await self.async_step_mqtt()
 
