@@ -103,7 +103,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if self.data[CONF_PORT] == 0:
             self.data[CONF_PORT] = 8883;
         _LOGGER.info("[MQTT] "+self.data[MQTT_USERNAME] +self.data[MQTT_PASSWORD]
-        + str(self.data[MQTT_PORT]))
+        + str(self.data[CONF_PORT]))
 
         data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","hostname":'+self.data[MQTT_BROKER]+'"}';
 
