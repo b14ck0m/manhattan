@@ -9,8 +9,9 @@
                 "title": "Welcome in Manhattan Lights"
             },
             "deviceID": {
+                "description": "Found new device {DEVICE_UUID}:",
+                "title": "Manhattan Light",
                 "data": {
-                    "device_id": "Manhattan Light device UUID",
                     "password": "Manhattan Light passowrd"
                 }
             },

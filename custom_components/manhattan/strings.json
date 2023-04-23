@@ -7,10 +7,11 @@
                 "title": "Welcome in Manhattan Lights"
             },
             "deviceID": {
+                "description": "Found new device {DEVICE_UUID}:",
                 "data": {
-                    "device_id": "Manhattan Light device {DEVICE_UUID} ",
                     "password": "Manhattan Light passowrd"
-                },
+                }
+            },
            "zerconf_finding": {
             },
             "mqtt": {
