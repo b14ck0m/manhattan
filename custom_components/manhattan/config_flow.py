@@ -151,6 +151,6 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if self.counting < self.data[RELAY_COUNT]:
             return self.async_show_form(step_id="relay_name",
                                         data_schema=vol.Schema(data_schema_relay),
-                                        description_placeholders={"name": str(self.data["counting"])};
+                                        description_placeholders={"name":str(self.counting)},
                                         errors=self._errors)
         return self.async_create_entry(title=DOMAIN,data=self.data)
