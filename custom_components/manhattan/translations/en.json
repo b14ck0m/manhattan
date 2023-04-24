@@ -18,18 +18,18 @@
             "mqtt": {
                 "description": "Please provide configuration of MQTT Broker:",
                 "data": {
-                    "target": "broker",
-                    "user": "Username",
+                    "target": "Broker hostname",
+                    "username": "Username",
                     "password": "Password",
                     "port": "Provide port if not default"
                 }
             },
-            "relay_count": {
+            "relay_name": {
                 "data": {
-                    "count": "How many lights have the device?"
+                    "name": "Name of relay in HomeAssistant"
                 },
-                "description": "Fill lights counts.",
-                "title": "Lights number"
+                "description": "Fill name for relay {name}",
+                "title": "Relay name setup"
             }
         }
     }
