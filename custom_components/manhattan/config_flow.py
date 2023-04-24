@@ -22,7 +22,7 @@ data_schema_user = {
 }
 
 data_schema_relay = {
-    vol.Required(CONF_COUNT): str
+    vol.Required(CONF_NAME): str
 }
 
 data_schema_mqtt = {
