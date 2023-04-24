@@ -141,11 +141,11 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                                         errors=self._errors)
         _LOGGER.info(pformat(user_input))
         self.data[CONF_NAME].append(self.data[CONF_NAME]);
-        self.data[CONF_PATH].append(self.data["counting"]);
+        self.data[CONF_PATH].append(self.counting);
         self.counting +=1;
         if self.counting < self.data[RELAY_COUNT]:
             return self.async_show_form(step_id="relay_name",
                                         data_schema=vol.Schema(data_schema_relay),
-                                        description_placeholders={"name":str(self.counting)},
+                                        description_placeholders={"name":self.counting},
                                         errors=self._errors)
         return self.async_create_entry(title=DOMAIN,data=self.data)
