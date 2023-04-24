@@ -140,7 +140,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                                         description_placeholders={"name":self.counting},
                                         errors=self._errors)
         _LOGGER.info(pformat(user_input))
-        self.data[CONF_NAME].append(self.data[CONF_NAME]);
+        self.data[CONF_NAME].append(user_input[CONF_NAME]);
         self.data[CONF_PATH].append(self.counting);
         self.counting +=1;
         if self.counting < self.data[RELAY_COUNT]:
