@@ -6,6 +6,7 @@ import aiohttp
 import requests
 import logging
 import yaml
+import json
 from typing import Any
 from pprint import *
 from homeassistant import config_entries 
@@ -40,6 +41,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
     def __init__(self):
         self.data = {}
+        self.data[CONF_PATH] = []
+        self.data[CONF_NAME] = []
         self._errors = {}
         self.host = ''
         self.name = ''
@@ -122,15 +125,31 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         _LOGGER.info("relay step")
+        text = "";
+        session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
+        async with session.get("https://"+self.host+"/uri/relay_count") as resp:
+            if resp.status != 200:
+                return await abort();
+            else:
+                text = resp.text
+        data = json.load(text);
+        self.data[RELAY_COUNT] = data[count];
+        self.data["counting"] = 0;
+        return await self.async_step_relay_name()
+
+    async def async_step_relay_name(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         if user_input is None:
-            return self.async_show_form(step_id="relay_count",
+            return self.async_show_form(step_id="relay_name",
                                         data_schema=vol.Schema(data_schema_relay),
+                                        description_placeholders={"name": str(self.data["counting"])};
                                         errors=self._errors)
         _LOGGER.info(pformat(user_input))
-        self.data[RELAY_COUNT] = user_input["count"]
-        self.data[CONF_NAME] = test_name
-        path = [];
-        for i in range(0,int(self.data[RELAY_COUNT])):
-            path.append(i);
-        self.data[CONF_PATH] = path;
+        self.data[CONF_NAME].append(self.data[CONF_NAME]);
+        self.data[CONF_PATH].append(self.data["counting"]);
+        self.data["counting"] +=1;
+        if self.data["counting"] < self.data[RELAY_COUNT]:
+            return self.async_show_form(step_id="relay_name",
+                                        data_schema=vol.Schema(data_schema_relay),
+                                        description_placeholders={"name": str(self.data["counting"])};
+                                        errors=self._errors)
         return self.async_create_entry(title=DOMAIN,data=self.data)

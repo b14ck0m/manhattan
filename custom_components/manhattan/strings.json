@@ -22,12 +22,12 @@
                     "port": "Provide port if not default"
                 }
             },
-            "relay_count": {
+            "relay_name": {
                 "data": {
-                    "count": "How many lights have the device?"
+                    "name": "Name of relay in HomeAssistant"
                 },
-                "description": "Fill lights counts.",
-                "title": "Lights number"
+                "description": "Fill name for relay {name}",
+                "title": "Relay name setup"
             }
         },
         "abort": {
