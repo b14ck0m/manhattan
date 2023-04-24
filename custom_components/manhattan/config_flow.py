@@ -130,7 +130,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if resp.status != 200:
                 return await abort();
         text = "";
-       return await self.async_step_relay_name()    
+        return await self.async_step_relay_name()    
 
     async def async_step_relay_name(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         if user_input is None:
