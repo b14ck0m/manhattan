@@ -115,7 +115,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if resp.status != 200:
                 return await abort();
             else:
-                text = resp.text()
+                text = await resp.text()
                 _LOGGER.info("[MQTT] "+text);
         data = json.loads(text);
         self.data[RELAY_COUNT] = data["count"];
