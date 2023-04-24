@@ -115,8 +115,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 return await abort();
             else:
                 text = resp.text
-        data = json.load(text);
-        self.data[RELAY_COUNT] = data[count];
+        data = json.loads(text);
+        self.data[RELAY_COUNT] = data["count"];
         self.counting = 0;
         data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","hostname":"'+self.data[MQTT_BROKER]+'"}';
         session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
