@@ -120,12 +120,6 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         async with session.post("https://"+self.host+"/uri/mqtt_conf",data=data) as resp:
             if resp.status != 200:
                 return await abort();
-        return await self.async_step_relay_count()    
-
-    async def async_step_relay_count(
-        self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
-        _LOGGER.info("relay step")
         text = "";
         session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
         async with session.get("https://"+self.host+"/uri/relay_count") as resp:
@@ -136,7 +130,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         data = json.load(text);
         self.data[RELAY_COUNT] = data[count];
         self.counting = 0;
-        return await self.async_step_relay_name()
+        return await self.async_step_relay_name()    
 
     async def async_step_relay_name(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         if user_input is None:
