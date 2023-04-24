@@ -109,6 +109,15 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self.data[CONF_PORT] = 8883;
         _LOGGER.info("[MQTT] "+self.data[MQTT_USERNAME] +self.data[MQTT_PASSWORD]
         + str(self.data[CONF_PORT]))
+        session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
+        async with session.get("https://"+self.host+"/uri/relay_count") as resp:
+            if resp.status != 200:
+                return await abort();
+            else:
+                text = resp.text
+        data = json.load(text);
+        self.data[RELAY_COUNT] = data[count];
+        self.counting = 0;
         data = '{"password":"'+self.data[DEVICE_PASSWORD]+'","hostname":"'+self.data[MQTT_BROKER]+'"}';
         session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
         async with session.post("https://"+self.host+"/uri/blocker",data=data) as resp:
@@ -121,16 +130,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if resp.status != 200:
                 return await abort();
         text = "";
-        session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
-        async with session.get("https://"+self.host+"/uri/relay_count") as resp:
-            if resp.status != 200:
-                return await abort();
-            else:
-                text = resp.text
-        data = json.load(text);
-        self.data[RELAY_COUNT] = data[count];
-        self.counting = 0;
-        return await self.async_step_relay_name()    
+       return await self.async_step_relay_name()    
 
     async def async_step_relay_name(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         if user_input is None:
